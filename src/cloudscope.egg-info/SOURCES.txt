@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+src/cloudscope/__init__.py
+src/cloudscope.egg-info/PKG-INFO
+src/cloudscope.egg-info/SOURCES.txt
+src/cloudscope.egg-info/dependency_links.txt
+src/cloudscope.egg-info/top_level.txt
+tests/test_basics.py
