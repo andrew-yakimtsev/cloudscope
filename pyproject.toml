@@ -5,14 +5,10 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "cloudscope"
 version = "0.1.0"
-description = "Azure infrastructure monitoring and automation platform"
+description = "A cloud-based IT monitoring and diagnostics platform"
 requires-python = ">=3.11"
-dependencies = [
-    "httpx>=0.27,<1.0"
-]
 
 [tool.setuptools.packages.find]
-where = ["src"]
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
+where = ["."]
+include = ["agent", "agent.*", "backend", "backend.*"]
+exclude = ["dashboard", "dashboard.*", "tests", "tests.*"]
