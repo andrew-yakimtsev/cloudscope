@@ -1,4 +1,5 @@
 import platform, psutil
+from datetime import datetime, timezone
 
 def get_system_info():
     system_info = {
@@ -27,9 +28,35 @@ def get_disk_info():
 
     return disk_info
 
+
+def get_uptime_info():
+    boot_timestamp = psutil.boot_time()
+
+    last_boot = datetime.fromtimestamp(boot_timestamp)
+    current_timestamp = datetime.now(timezone.utc).timestamp()
+
+    uptime_seconds = max(0, int(current_timestamp - boot_timestamp))
+
+    uptime_days, remaining_seconds = divmod(uptime_seconds, 86400)
+    uptime_hours, remaining_seconds = divmod(remaining_seconds, 3600)
+    uptime_minutes, _ = divmod(remaining_seconds, 60)
+
+    uptime_info = {
+        "last_boot": last_boot.strftime("%Y-%m-%d %H:%M:%S"),
+        "uptime_seconds": uptime_seconds,
+        "uptime_days": uptime_days,
+        "uptime_hours": uptime_hours,
+        "uptime_minutes": uptime_minutes
+    }
+
+    return uptime_info
+
 if __name__ == "__main__":
     for key, value in get_system_info().items():
         print(f"{key}: {value}")
 
     for key, value in get_disk_info().items():
+        print(f"{key}: {value}")
+
+    for key, value in get_uptime_info().items():
         print(f"{key}: {value}")
