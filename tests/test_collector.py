@@ -1,4 +1,3 @@
-
 import agent.collector as collector
 from agent.models import DeviceInfo
 
